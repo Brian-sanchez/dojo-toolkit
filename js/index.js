@@ -28,22 +28,44 @@ var data = {
   items: []
 };
 var data_list = [
-  { col1: "normal", col2: false, col3: 'celular', col4: 29.91},
-  { col1: "important", col2: false, col3: 'iphone', col4: 9.33},
-  { col1: "important", col2: false, col3: 'lenovo', col4: 19.34}
+    {
+        col2: "Monitor Led Aopen",
+        col3: "Monitor Led Curvo 27\" Aopen 27hc5r P",
+        col4: "56000",
+    },
+    {
+        col2: "Monitor Led Aopen",
+        col3: "Monitor Led Curvo 27\" Aopen 27hc5r P",
+        col4: "56000",
+    },
+    {
+        col2: "Monitor Led Aopen",
+        col3: "Monitor Led Curvo 27\" Aopen 27hc5r P",
+        col4: "56000",
+    },
+    {
+        col2: "Monitor Led Aopen",
+        col3: "Monitor Led Curvo 27\" Aopen 27hc5r P",
+        col4: "56000"
+    },
+    {
+        col2: "Monitor Led Aopen",
+        col3: "Monitor Led Curvo 27\" Aopen 27hc5r P",
+        col4: "56000"
+    }
 ];
-var rows = 10;
-for(var i = 0, l = data_list.length; i < rows; i++){
+
+for(var i = 0, l = data_list.length; i < data_list.length; i++){
     data.items.push(lang.mixin({ id: i+1 }, data_list[i%l]));
 }
 var store = new ItemFileWriteStore({data: data});
 
 /*set up layout*/
 var layout = [[
-  {'name': 'Column 1', 'field': 'id', 'width': '100px'},
-  {'name': 'Column 2', 'field': 'col2', 'width': '100px'},
-  {'name': 'Column 3', 'field': 'col3', 'width': '200px'},
-  {'name': 'Column 4', 'field': 'col4', 'width': '150px'}
+  {'name': 'Column 1', field: 'id'},
+  {'name': 'Column 2', field: 'col2'},
+  {'name': 'Column 3', field: 'col3'},
+  {'name': 'Column 4', field: 'col4'}
 ]];
 
 /*create a new grid*/
