@@ -322,33 +322,6 @@ require([
   Button,
   mouse
 ) {
-    var buttonFormatter = function(inValue, rowId, cellId, cellField){
-        if (inValue == 'Button_1') {
-        var new_button = new dijit.form.Button({ 
-            label: 'Detail', showLabel: false,
-            iconClass: "dijitEditorIcon dijitEditorIconInsertOrderedList",
-            'class': 'gridButton'});
-        new_button._destroyOnRemove = true;
-        return new_button;
-        }
-        else if (inValue == 'Button_2') {
-        var new_button = new dijit.form.Button({ 
-            label: 'Detail', showLabel: false,
-            iconClass: "dijitEditorIcon dijitEditorIconRemoveFormat",
-            'class': 'gridButton'});
-        new_button._destroyOnRemove = true;
-        return new_button;
-        }
-        else if (inValue == 'Button_3') {
-        var new_button = new dijit.form.Button({ 
-            label: 'New', showLabel: false,
-            iconClass: "dijitEditorIcon dijitEditorIconSelectAll",
-            'class': 'gridButton'});
-        new_button._destroyOnRemove = true;
-        return new_button;
-        }
-        else return null;
-    };
     
   data = {
     items: [
@@ -359,13 +332,7 @@ require([
             image: "https://masonlineprod.vtexassets.com/arquivos/ids/202463",
             category: "Phones",
             price: 170000,
-            created: "false",
-            formatter: function(item){
-                var btn = new dijit.form.Button({
-                    label: "Edit"
-                });
-            return btn;
-            }
+            created: "false"
         },
         {
             id: 2,
@@ -649,12 +616,6 @@ require([
     ],
   };
 
-  var actions = [
-    {
-
-    }
-  ];
-
   store = new Memory({ data: data.items });
   dataStore = new ObjectStore({ objectStore: store });
   danik = new Stateful(data.items);
@@ -697,7 +658,9 @@ require([
 
      /* attach an event handler */
      on(button1, 'click', function(e){
-        store.remove(1)
+       // var newStore = new dojo.data.ItemFileReadStore({data: { items: [{id: 5, name: "ola", price: 32}]}});
+        console.log(grid)
+       grid.setStore();
      }
      );
 
