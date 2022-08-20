@@ -308,7 +308,10 @@ require([
   "dijit/form/DateTextBox",
   'dojo/on',
   "dojo/mouse",
-  "dojo/domReady!"
+  "dojo/domReady!",
+  "dojo/store/JsonRest",
+  'dojo/data/ItemFileWriteStore',
+  'dojo/_base/lang'
 ], function (
   dom,
   domConstruct,
@@ -320,10 +323,13 @@ require([
   on,
   event,
   Button,
-  mouse
+  mouse,
+  JsonRest,
+  ItemFileWriteStore
 ) {
     
   data = {
+    identifier: "products",
     items: [
         {
             id: 1,
@@ -649,18 +655,25 @@ require([
      /* attach an event handler */
      on(button2,'click', function(e) {
          /* set the properties for the new item: */
-         var myNewItem = {id: 33, name: "Mediate", price: 20};
+         //var myNewItem = {id: 33, name: "Mediate", price: 20};
          //var myNewItem = {id: (++i), col1: "Mediate", col2: true, col3: 'Newly added values', col4: 8888};
          /* Insert the new item into the store:*/
-         data.items.push(myNewItem);
+         //data.items.push(myNewItem);
+
+         // grid.destroy() // con esto puedes eliminar todo el datagrid
+        // grid.update()
+        var newStore = new dojo.data.ItemFileReadStore({data: {}});
+        grid.setStore(newStore);
      }
      );
 
      /* attach an event handler */
-     on(button1, 'click', function(e){
-       // var newStore = new dojo.data.ItemFileReadStore({data: { items: [{id: 5, name: "ola", price: 32}]}});
-        console.log(grid)
-       grid.setStore();
+     on(button1, 'click', function(e) {
+      // var newStore = new dojo.data.ItemFileReadStore({data: { items: [{id: 5, name: "ola", price: 32}]}});
+      store.remove(1);
+      console.log(store)
+      console.log(grid)
+      grid.render()
      }
      );
 
