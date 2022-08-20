@@ -5,12 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
-    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+    <link href="dojo-release-1.17.3/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css" />
+    <script>dojoConfig = { async: true }</script>
+    <script src="dojo-release-1.17.3/dojo/dojo.js"></script>
     <title>DOJO PROJECT</title>
+    <script>
+		require([
+			"dojo/dom",
+			"dijit/MenuBar",
+			"dijit/PopupMenuBarItem",
+			"dijit/Menu",
+			"dijit/MenuBarItem",
+			"dijit/MenuItem",
+			"dijit/DropDownMenu",
+			"dojo/domReady!"
+		], function (dom,MenuBar, PopupMenuBarItem, Menu,MenuBarItem, MenuItem, DropDownMenu) {
+			var pMenuBar = new MenuBar({},"menu");
+
+			pMenuBar.addChild(new MenuBarItem({
+				id: "cli",
+				label: "Clientes",
+				onClick: function(){
+					dom.byId("clientes").innerHTML = "Clientes";
+					dom.byId("clientes").style.display='inline';
+					dom.byId("productos").style.display='none';
+				}
+			}));
+			pMenuBar.addChild(new MenuBarItem({
+				id: "prod",
+				label: "Productos",
+				onClick: function(){
+					dom.byId("productos").innerHTML = "Productos";
+					dom.byId("productos").style.display='inline';
+					dom.byId("clientes").style.display='none';
+				}
+			}));
+
+			// pMenuBar.placeAt("menu");
+			pMenuBar.startup();
+
+		});
+	</script>
 </head>
 <body>
     <h1>THE PROJECT DOJO</h1>
-    <h2>todos los derechos reservados</h2>
+    <!-- <div>
+		<button id="clienteButton" type="button"></button>
+		<button id="productoButton" type="button"></button>
+	</div> -->
+	<div id="menu"></div>
+	<div id="clientes">
+		<div id="grilla"></div>
+	</div>
+	<div id="productos">
+
+	</div>
 
 
     <script src="./js/index.js"></script>
