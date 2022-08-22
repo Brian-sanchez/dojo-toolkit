@@ -1,6 +1,6 @@
 function getData() {
   require(["dojo/request"], function (request) {
-    request.get("./products.json").then(function (data) {
+    request.get("../products.json").then(function (data) {
       localStorage.setItem("products", data);
     });
   });
@@ -13,7 +13,7 @@ function deleteProduct(item) {
     return e.id !== item;
   });
 
-  let arrJson = JSON.stringify(ola);
+  let arrJson = JSON.stringify(arrFilter);
 
   localStorage.setItem("products", arrJson);
 
@@ -61,8 +61,8 @@ require([
   ItemFileWriteStore,
   _Events
 ) {
+  getData()
   let getLocalStorage = JSON.parse(localStorage.getItem("products"));
-  //localStorageGrid();
   data = {
     identifier: "products",
     items: getLocalStorage,
