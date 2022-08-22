@@ -294,11 +294,7 @@ function localStorageGrid() {
 }
 
 function deleteCustomer(item) {
-    //console.log(event);
-    //console.log("Id a borrar: " + item)
-
     let arr = JSON.parse(localStorage.getItem("products"));
-    //let arr = store.data;
 
     let ola = arr.filter(e => {
         return e.id !== item
@@ -308,7 +304,6 @@ function deleteCustomer(item) {
 
     localStorage.setItem("products", olaJson);
 
-    
     arr.forEach( function (datos) {
         if (item == datos.id) {
             store.remove(item);
@@ -351,12 +346,11 @@ require([
   JsonRest,
   ItemFileWriteStore
 ) {
-    
     let getLocalStorage = JSON.parse(localStorage.getItem("products"));
 
   data = {
     identifier: "products",
-    items: JSON.parse(localStorage.getItem("products"))
+    items: getLocalStorage
   };
 
   //store = new JsonRest({ target: "products" });
@@ -396,19 +390,25 @@ require([
         try {
             store.newItem({id: itemsLenght + 1, name: "Mediate", price: 20});
         } catch (e) { 
-                  //An item with the same identity already exists
-                  console.log("oal")
-               }
+            //An item with the same identity already exists
+            console.log("oal")
+        }
 
-               grid.render();
+        grid.render();
     })
 
 
      // Add action
      on(button2,'click', function(e) {
+        let dataJson = JSON.parse(localStorage.getItem("products"));
         let itemsLenght = data.items.length;
 
-        let myNewItem = {id: itemsLenght + 1, name: "Mediate", price: 20}
+        let myNewItem = {id: itemsLenght + 1, name: "Mediate", price: 20};
+
+        dataJson.push(myNewItem);
+        let olaJson = JSON.stringify(dataJson);
+
+        localStorage.setItem("products", olaJson);
         data.items.push(myNewItem);
 
         console.log(data.items)
