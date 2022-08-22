@@ -14,6 +14,7 @@
             "dijit/form/Button",
             "dijit/form/ValidationTextBox",
             "dijit/form/DateTextBox",
+            "dojox/validate/web"
         ]);
     </script>
 </head>
@@ -71,12 +72,11 @@
                 <td>
                     <input data-dojo-type="dijit/form/ValidationTextBox" id="email" name="email" data-dojo-props="
                     promptMessage:'Enter Your Email: Use format user@email.com',
-                    RegExp:'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$',
+                    validator: dojox.validate.isEmailAddress,
                     required: true,
                     placeHolder:'Your Email',
-                    invalidMessage: 'Email Required, [a@a] !'" />
+                    invalidMessage: 'Email Required, [user@email.com] !'" />
                 </td>
-                <!--validator: function (val){return dojox.validate.isEmailAddress(val)}-->
             </tr>
             <tr>
                 <td>
