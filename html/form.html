@@ -29,22 +29,32 @@
         </script>
 
         <script type="dojo/on" data-dojo-event="submit">
-        if(this.validate()){
-            return confirm('Valid form, press OK to send');
-        }else{
-            alert('The form contains invalid data or missing information!');
-            return false;
-        }
-        return true;
-    </script>
+            event.preventDefault();
+            let clients = [];
+            let client = {id:"", first:"", last:"", phone:"", email:""};
+            client.id = clients.length + 1;
+             
+            if(this.validate()){
+                client.first = myForm.getValues().first;
+                client.last = myForm.getValues().last;
+                client.phone = myForm.getValues().phone;
+                client.email = myForm.getValues().email;
+                clients = [...clients, client];
+                console.log(clients);
+                return confirm('Valid form, press OK to send');
+            }else{
+                alert('The form contains invalid data or missing information!');
+                return false;
+            }
+        </script>
 
         <table style="border: 1px solid #9f9f9f;" cellspacing="10">
             <tr>
                 <td>
-                    <label for="name">Name:</label>
+                    <label for="first">Name:</label>
                 </td>
                 <td>
-                    <input data-dojo-type="dijit/form/ValidationTextBox" id="name" name="name" data-dojo-props="
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="first" name="first" data-dojo-props="
                     promptMessage:'Enter Your Name: [A-Z] Min 3, Max 15 characters',
                     regExp: '.[a-z, A-Z]{2,14}$',
                     required: true,
@@ -54,28 +64,15 @@
             </tr>
             <tr>
                 <td>
-                    <label for="lastName">Last Name:</label>
+                    <label for="last">Last Name:</label>
                 </td>
                 <td>
-                    <input data-dojo-type="dijit/form/ValidationTextBox" id="lastName" name="lastName" data-dojo-props="
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="last" name="last" data-dojo-props="
                     promptMessage:'Enter Your Last Name: [A-Z] Min 3, Max 15 characters',
                     regExp: '.[a-z, A-Z]{2,14}$',
                     required: true,
                     placeHolder:'Your Last Name',
                     invalidMessage: 'Last Name Required, [Aa-Zz] !'" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="email">Email:</label>
-                </td>
-                <td>
-                    <input data-dojo-type="dijit/form/ValidationTextBox" id="email" name="email" data-dojo-props="
-                    promptMessage:'Enter Your Email: Use format user@email.com',
-                    validator: dojox.validate.isEmailAddress,
-                    required: true,
-                    placeHolder:'Your Email',
-                    invalidMessage: 'Email Required, [user@email.com] !'" />
                 </td>
             </tr>
             <tr>
@@ -91,11 +88,24 @@
                     invalidMessage: 'Phone Required!'" />
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label for="email">Email:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="email" name="email" data-dojo-props="
+                    promptMessage:'Enter Your Email: Use format user@email.com',
+                    validator: dojox.validate.isEmailAddress,
+                    required: true,
+                    placeHolder:'Your Email',
+                    invalidMessage: 'Email Required, [user@email.com] !'" />
+                </td>
+            </tr>
         </table>
 
         <button data-dojo-type="dijit/form/Button" type="button" onClick="console.log(myForm.getValues())">
             Valores del formulario</button>
-        <button data-dojo-type="dijit/form/Button" type="submit" name="submitButton" value="Submit">Submit</button>
+        <button data-dojo-type="dijit/form/Button" type="submit">Submit</button>
         <button data-dojo-type="dijit/form/Button" type="reset">Reset</button>
 
     </div>
