@@ -347,82 +347,77 @@ require([
   ItemFileWriteStore
 ) {
     let getLocalStorage = JSON.parse(localStorage.getItem("products"));
+    //localStorageGrid();
+    data = {
+      identifier: "products",
+      items: getLocalStorage,
+    };
 
-  data = {
-    identifier: "products",
-    items: getLocalStorage
-  };
+    //store = new JsonRest({ target: "products" });
+    store = new Memory({ data: data.items });
+    dataStore = new ObjectStore({ objectStore: store });
+    danik = new Stateful(data.items);
 
-  //store = new JsonRest({ target: "products" });
-  store = new Memory({ data: data.items });
-  dataStore = new ObjectStore({ objectStore: store });
-  danik = new Stateful(data.items);
+    grid = new DataGrid(
+      {
+        store: dataStore,
+        query: { id: "*" },
 
-  grid = new DataGrid(
-    {
-      store: dataStore,
-      query: { id: "*" },
-
-      structure: [
-        {
-          noscroll: false,
-          defaultCell: { width: "120px", editable: true },
-          cells: [
-            { name: "ID", field: "id" },
-            { name: "Nombre", field: "name" },
-            { name: "Precio", field: "price" },
-            { name: "Action", field: "id", formatter: getDelete }
-          ],
-        },
-      ],
-    },
-    "grid"
-  );
-
-
+        structure: [
+          {
+            noscroll: false,
+            defaultCell: { width: "120px", editable: true },
+            cells: [
+              { name: "ID", field: "id" },
+              { name: "Nombre", field: "name" },
+              { name: "Precio", field: "price" },
+              { name: "Action", field: "id", formatter: getDelete },
+            ],
+          },
+        ],
+      },
+      "grid"
+    );
 
     var button2 = dom.byId("add");
     var button1 = dom.byId("delete");
     var button3 = dom.byId("add2");
 
     // Add prueba
-    on(button3, "click", function(e) {
-        try {
-            store.newItem({id: itemsLenght + 1, name: "Mediate", price: 20});
-        } catch (e) { 
-            //An item with the same identity already exists
-            console.log("oal")
-        }
+    on(button3, "click", function (e) {
+      try {
+        store.newItem({ id: itemsLenght + 1, name: "Mediate", price: 20 });
+      } catch (e) {
+        //An item with the same identity already exists
+        console.log("oal");
+      }
 
-        grid.render();
-    })
+      grid.render();
+    });
 
+    // Add action
+    on(button2, "click", function (e) {
+      let dataJson = JSON.parse(localStorage.getItem("products"));
+      let itemsLenght = data.items.length;
 
-     // Add action
-     on(button2,'click', function(e) {
-        let dataJson = JSON.parse(localStorage.getItem("products"));
-        let itemsLenght = data.items.length;
+      let myNewItem = { id: itemsLenght + 1, name: "Mediate", price: 20 };
 
-        let myNewItem = {id: itemsLenght + 1, name: "Mediate", price: 20};
+      dataJson.push(myNewItem);
+      let olaJson = JSON.stringify(dataJson);
+      localStorage.setItem("products", olaJson);
 
-        dataJson.push(myNewItem);
-        let olaJson = JSON.stringify(dataJson);
+      grid.update();
+      grid.render();
 
-        localStorage.setItem("products", olaJson);
-        data.items.push(myNewItem);
+      window.location.reload()
+    });
 
-        console.log(data.items)
-        grid.update();
-        grid.render();
-     }
-     );
+    function getDelete(item) {
+      return `<button onclick=deleteCustomer(${item}) id='myButton'>Delete</button>`;
+    }
 
-  function getDelete(item) {
-    return `<button onclick=deleteCustomer(${item}) id='myButton'>Delete</button>`;
-  }
-  
-  console.log(grid)
-  grid.startup();
+    console.log(grid);
+    grid.startup();
 });
 
 
