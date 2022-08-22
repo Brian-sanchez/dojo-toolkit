@@ -21,83 +21,11 @@
           
         <div class="abm">
             <h1>ABM</h1>
-
-            <button onclick="onChange()">Eliminar</button>
-            <button id="ola">Agregar</button>
-            <button id="adios">Modificar</button>
+            <button id="add">Agregar</button>
+            <button id="delete">Eliminar</button>
+            <button id="add2">Agregar Store</button>
         </div>
     </div>
-
-    <span dojoType="dojo.data.ItemFileReadStore" data-dojo-id="studentsStore" url="http://localhost/newsmis/public/studentManagement/student/fetchdata/data/1"></span>
-<table dojoType="dojox.grid.DataGrid" id="studentsGrid" data-dojo-id="studentsGrid" columnReordering="true" sortFields="['idstudents','first_name','middle_name','last_name']" store="studentsStore"  clientSort="true" selectionMode="single" rowHeight="25" noDataMessage="<span class='dojoxGridNoData'>No students found</span>">
-    <thead>
-        <tr>
-            <th field="idstudents" width="20%">Student ID</th>
-            <th field="first_name" width="20%">First Name</th>
-            <th field="middle_name" width="20%">Middle Name</th>
-            <th field="last_name" width="20%">Last Name</th>
-            <th field="action" width="20%">Action</th>
-        </tr>
-    </thead>
-</table>
-    
-    <script>
-  function onChange() {
-    //var newStore = new dojo.data.ItemFileReadStore({data: {  identifier: "",  items: []}});
-    var grid = dijit.byId("grid");
-    //store.deleteItem(store.fetchItemByIdentity({identity: '1'}));
-    //console.log(store.data)
-
-    /*
-    var newStore = store.query().forEach(function (item) {
-        console.log(item);
-        var id = store.getIdentity(item);
-        if (id % 2) {
-            store.remove(id);
-        }
-    });
-    */
-
-    var newStore = new dojo.data.ItemFileReadStore({data: {  identifier: "*",  items: [        {
-            id: 1,
-            name: "Iphone",
-            description: "Iphone Se 64gb Blanco",
-            image: "https://masonlineprod.vtexassets.com/arquivos/ids/202463",
-            category: "Phones",
-            price: 170000,
-            created: "false"
-        },
-        {
-            id: 2,
-            name: "Motorola Edge 20 Pro",
-            description: "Smartphone Motorola Edge 20 Pro 256/12gb Blanco",
-            image: "https://masonlineprod.vtexassets.com/arquivos/ids/201576",
-            category: "Phones",
-            price: 119000,
-            created: "false"
-        },
-        {
-            id: 3,
-            name: "Samsung Galaxy S21 Fe",
-            description: "Samsung Galaxy S21 Fe 5g 128/6gb Verde",
-            image: "https://masonlineprod.vtexassets.com/arquivos/ids/209666",
-            category: "Phones",
-            price: 138000,
-            created: "false"
-        },
-        {
-            id: 4,
-            name: "Samsung Galaxy S22",
-            description: "Samsung Galaxy S22 Blanco 128/8gb",
-            image: "https://masonlineprod.vtexassets.com/arquivos/ids/202078",
-            category: "Phones",
-            price: 164000,
-            created: "false"
-        }]}});
-
-    grid.setStore(storeage)
-  }
-    </script>
     <script src="./js/grid.js"></script>
 </body>
 </html>
