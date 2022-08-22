@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../dojo-release-1.17.3/dijit/themes/claro/claro.css">
+
+    <script>dojoConfig = { parseOnLoad: true }</script>
+    <script src='../dojo-release-1.17.3/dojo/dojo.js'></script>
+
+    <script>
+        require([
+            "dojo/parser",
+            "dijit/form/Form",
+            "dijit/form/Button",
+            "dijit/form/ValidationTextBox",
+            "dijit/form/DateTextBox",
+        ]);
+    </script>
+</head>
+
+<body class="claro">
+    <label for="">Register Client</label><br>
+
+    <div data-dojo-type="dijit/form/Form" id="myForm" data-dojo-id="myForm" encType="multipart/form-data" action=""
+        method="">
+        <script type="dojo/on" data-dojo-event="reset">
+            return confirm('Press OK to reset widget values');
+        </script>
+
+        <script type="dojo/on" data-dojo-event="submit">
+        if(this.validate()){
+            return confirm('Valid form, press OK to send');
+        }else{
+            alert('The form contains invalid data or missing information!');
+            return false;
+        }
+        return true;
+    </script>
+
+        <table style="border: 1px solid #9f9f9f;" cellspacing="10">
+            <tr>
+                <td>
+                    <label for="name">Name:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="name" name="name" data-dojo-props="
+                    promptMessage:'Enter Your Name: [A-Z] Min 3, Max 15 characters',
+                    regExp: '.[a-z, A-Z]{2,14}$',
+                    required: true,
+                    placeHolder:'Your First Name',
+                    invalidMessage: 'First Name Required, [Aa-Zz] !'" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lastName">Last Name:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="lastName" name="lastName" data-dojo-props="
+                    promptMessage:'Enter Your Last Name: [A-Z] Min 3, Max 15 characters',
+                    regExp: '.[a-z, A-Z]{2,14}$',
+                    required: true,
+                    placeHolder:'Your Last Name',
+                    invalidMessage: 'Last Name Required, [Aa-Zz] !'" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">Email:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="email" name="email" data-dojo-props="
+                    promptMessage:'Enter Your Email: Use format user@email.com',
+                    RegExp:'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$',
+                    required: true,
+                    placeHolder:'Your Email',
+                    invalidMessage: 'Email Required, [a@a] !'" />
+                </td>
+                <!--validator: function (val){return dojox.validate.isEmailAddress(val)}-->
+            </tr>
+            <tr>
+                <td>
+                    <label for="phone">Phone:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="phone" name="phone" data-dojo-props="
+                    promptMessage:'Enter Your Phone: Min 8, Max 14 numbers',
+                    regExp: '.[0-9]{7,13}$',
+                    required: true,
+                    placeHolder:'Your Phone',
+                    invalidMessage: 'Phone Required!'" />
+                </td>
+            </tr>
+        </table>
+
+        <button data-dojo-type="dijit/form/Button" type="button" onClick="console.log(myForm.getValues())">
+            Valores del formulario</button>
+        <button data-dojo-type="dijit/form/Button" type="submit" name="submitButton" value="Submit">Submit</button>
+        <button data-dojo-type="dijit/form/Button" type="reset">Reset</button>
+
+    </div>
+</body>
+
+</html>
