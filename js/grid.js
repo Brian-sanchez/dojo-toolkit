@@ -125,8 +125,6 @@ require([
   );
 
   var button2 = dom.byId("add");
-  var button1 = dom.byId("delete");
-  var button3 = dom.byId("add2");
 
   // Add action
   on(button2, "click", function (e) {
