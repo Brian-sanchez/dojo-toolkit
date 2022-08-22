@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=ç, initial-scale=1.0">
+    <meta name="viewport" content="width=, initial-scale=1.0">
     <link rel="stylesheet" href="./dojo-release-1.17.3/dojo-release-1.17.3/dojo/resources/dojo.css">
     <link rel="stylesheet" href="./dojo-release-1.17.3/dojo-release-1.17.3/dojox/grid/resources/claroGrid.css">
     <script src="./dojo-release-1.17.3/dojo-release-1.17.3/dojo/dojo.js"></script>
@@ -29,6 +29,31 @@
     </div>
     <script src="./js/grid.js"></script>
 
+    <br>
+    <br>
+    <br>
     
+    <div id='API-btn-grp'>
+		<input data-dojo-type="dijit.form.NumberTextBox" id="pagesize" data-dojo-id="pagesize" data-dojo-props="style:{width:'40px'}"></input>
+		<button data-dojo-type="dijit.form.Button" onclick="currentPageSize()">Set Page Size</button>
+		 | 
+		<button data-dojo-type="dijit.form.Button" onclick="grid.firstPage()">first page</button>
+		<button data-dojo-type="dijit.form.Button" onclick="grid.prevPage()">previous page</button>
+		 | 
+		Page: 
+		<input data-dojo-type="dijit.form.NumberTextBox" id="page" data-dojo-id="page" data-dojo-props="style:{width:'40px'}"></input>
+		<button data-dojo-type="dijit.form.Button" onclick="currentPage()">Go</button>
+		 | 
+		<button data-dojo-type="dijit.form.Button" onclick="grid.nextPage()">next page</button>
+		<button data-dojo-type="dijit.form.Button" onclick="grid.lastPage()">last page</button>
+		 | 
+		Goto specific row: 
+		<input data-dojo-type="dijit.form.NumberTextBox" id="row" data-dojo-id="row" data-dojo-props="style:{width:'40px'}"></input>
+		<button data-dojo-type="dijit.form.Button" onclick="scrollToRow()">Go</button>
+	</div>
+	<div id="gridContainer">
+		<div id="grid" dojoType="dojox.grid.EnhancedGrid" store="test_store[0]" structure="layout" plugins="plugins" summary="A customized grid summary"></div>
+	</div><br/>
+
 </body>
 </html>
