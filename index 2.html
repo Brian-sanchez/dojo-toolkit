@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Formulario prueba</title>
+    <link rel="stylesheet" href="../dojo-release-1.17.3/dijit/themes/claro/claro.css">
+
+    <script>dojoConfig = { parseOnLoad: true }</script>
+    <script src='../dojo-release-1.17.3/dojo/dojo.js'></script>
+
+    <script>
+        require(["dojo/parser", "dijit/form/Form", "dijit/form/Button", "dijit/form/ValidationTextBox", "dijit/form/DateTextBox"]);
+    </script>
+</head>
+
+
+
+<body class="claro">
+
+
+    <div data-dojo-type="dijit/form/Form" id="myForm" data-dojo-id="myForm" encType="multipart/form-data" action=""
+        method="">
+        <script type="dojo/on" data-dojo-event="reset">
+        return confirm('Press OK to reset widget values');
+    </script>
+        <script type="dojo/on" data-dojo-event="submit">
+        if(this.validate()){
+            return confirm('Form is valid, press OK to submit');
+        }else{
+            alert('Form contains invalid data.  Please correct first');
+            return false;
+        }
+        return true;
+    </script>
+        <table style="border: 1px solid #9f9f9f;" cellspacing="10">
+            <tr>
+                <td>
+                    <label for="name">Product:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="product" name="product" data-dojo-props="
+                    promptMessage:'Enter a Product: Max 25 characters',
+                    regExp: '.[a-z, A-Z, 0-9]{2,24}$',
+                    required: true,
+                    placeHolder:'add Product Name',
+                    invalidMessage: 'add Name Required!'" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="name">Precio: US$</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit/form/ValidationTextBox" id="price" name="price" data-dojo-props="
+                    promptMessage:'Enter a price: Max 7 characters',
+                    regExp: '.[0-9]{0,6}$',
+                    required: true,
+                    placeHolder:'US$ add price',
+                    invalidMessage: 'add price Required!'" />
+                </td>
+            </tr>
+
+
+        </table>
+
+        <button data-dojo-type="dijit/form/Button" type="button" onClick="console.log(myForm.getValues())">Get Values
+            from form!</button>
+        <button data-dojo-type="dijit/form/Button" type="submit" name="submitButton" value="Submit">Enviar</button>
+        <button data-dojo-type="dijit/form/Button" type="reset">Borrar</button>
+    </div>
+
+
+
+</body>
+
+</html>
