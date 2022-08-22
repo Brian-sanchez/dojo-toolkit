@@ -330,7 +330,8 @@ require([
   "dojo/domReady!",
   "dojo/store/JsonRest",
   'dojo/data/ItemFileWriteStore',
-  'dojo/_base/lang'
+  'dojo/_base/lang',
+  "dojox/grid/_Events"
 ], function (
   dom,
   domConstruct,
@@ -344,7 +345,8 @@ require([
   Button,
   mouse,
   JsonRest,
-  ItemFileWriteStore
+  ItemFileWriteStore,
+  _Events
 ) {
     let getLocalStorage = JSON.parse(localStorage.getItem("products"));
     //localStorageGrid();
@@ -362,6 +364,65 @@ require([
       {
         store: dataStore,
         query: { id: "*" },
+        onApplyCellEdit: function(inValue, inRowIndex, inFieldIndex){
+            console.log(inValue); // valor de la celda editada
+            console.log(inFieldIndex); // nombre del field
+            console.log(inRowIndex) // index del array del datagrid
+            /*
+            let filtrado = getLocalStorage.filter(e => {
+                return e !== getLocalStorage[inRowIndex]
+            })
+
+            delete getLocalStorage[inRowIndex].__isDirty;
+
+            let newData = getLocalStorage[inRowIndex]
+            let newJson = getLocalStorage.splice(inRowIndex, 1, newData)
+            */
+    
+           // getLocalStorage[inRowIndex] = Object.assign({}, getLocalStorage[index], newData)
+
+           let olaJson = JSON.stringify(getLocalStorage);
+
+           localStorage.setItem("products", olaJson);
+        },
+
+        /*
+        -- Eventos del datagrid al momento de editarlo --
+
+        onStartEdit: function(inCell, inRowIndex){
+            // summary:
+            //      Event fired when editing is started for a given grid cell
+            // inCell: Object
+            //      Cell object containing properties of the grid column.
+            // inRowIndex: Integer
+            //      Index of the grid row
+        },
+
+        onApplyCellEdit: function(inValue, inRowIndex, inFieldIndex){
+            // summary:
+            //      Event fired when editing is applied for a given grid cell
+            // inValue: String
+            //      Value from cell editor
+            // inRowIndex: Integer
+            //      Index of the grid row
+            // inFieldIndex: Integer
+            //      Index in the grid's data store
+        },
+
+        onCancelEdit: function(inRowIndex){
+            // summary:
+            //      Event fired when editing is cancelled for a given grid cell
+            // inRowIndex: Integer
+            //      Index of the grid row
+        },
+
+        onApplyEdit: function(inRowIndex){
+            // summary:
+            //      Event fired when editing is applied for a given grid row
+            // inRowIndex: Integer
+            //      Index of the grid row
+        }
+        */
 
         structure: [
           {
@@ -383,24 +444,15 @@ require([
     var button1 = dom.byId("delete");
     var button3 = dom.byId("add2");
 
-    // Add prueba
-    on(button3, "click", function (e) {
-      try {
-        store.newItem({ id: itemsLenght + 1, name: "Mediate", price: 20 });
-      } catch (e) {
-        //An item with the same identity already exists
-        console.log("oal");
-      }
-
-      grid.render();
-    });
-
     // Add action
     on(button2, "click", function (e) {
       let dataJson = JSON.parse(localStorage.getItem("products"));
-      let itemsLenght = data.items.length;
 
-      let myNewItem = { id: itemsLenght + 1, name: "Mediate", price: 20 };
+      let ids = dataJson.map(e => {
+        return e.id;
+      });
+
+      let myNewItem = { id: Math.max(...ids) + 1, name: "Mediate", price: 20 };
 
       dataJson.push(myNewItem);
       let olaJson = JSON.stringify(dataJson);
