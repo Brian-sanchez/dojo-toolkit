@@ -335,7 +335,9 @@ require([
   "dojo/domReady!",
   "dojo/store/JsonRest",
   'dojo/data/ItemFileWriteStore',
-  'dojo/_base/lang'
+  'dojo/_base/lang',
+  "dojox.grid.EnhancedGrid",
+  "dojox.grid.enhanced.plugins.Pagination"
 ], function (
   dom,
   domConstruct,
@@ -349,7 +351,9 @@ require([
   Button,
   mouse,
   JsonRest,
-  ItemFileWriteStore
+  ItemFileWriteStore,
+  enhanced,
+  EnhancedGrid
 ) {
     
     let getLocalStorage = JSON.parse(localStorage.getItem("products"));
@@ -363,6 +367,14 @@ require([
   store = new Memory({ data: data.items });
   dataStore = new ObjectStore({ objectStore: store });
   danik = new Stateful(data.items);
+
+
+  var rows = 10;
+
+  for(var i=0, l=data.length; i<rows; i++){
+    data.items.push(dojo.mixin({ id: i+1 }, data_list[i%l]));
+  }
+  var store = new dojo.data.ItemFileWriteStore({data: data});
 
   grid = new DataGrid(
     {
@@ -381,7 +393,17 @@ require([
           ],
         },
       ],
-    },
+      rowSelector: '20px',
+      plugins:{
+        pagination: {
+            description: true,
+            sizeSwitch: true,
+            pageStepper: true,
+            gotoButton: true,
+            maxPageStep: 4,
+        }
+      }
+    }, 
     "grid"
   );
 
