@@ -368,19 +368,8 @@ require([
             console.log(inValue); // valor de la celda editada
             console.log(inFieldIndex); // nombre del field
             console.log(inRowIndex) // index del array del datagrid
-            /*
-            let filtrado = getLocalStorage.filter(e => {
-                return e !== getLocalStorage[inRowIndex]
-            })
-
-            delete getLocalStorage[inRowIndex].__isDirty;
-
-            let newData = getLocalStorage[inRowIndex]
-            let newJson = getLocalStorage.splice(inRowIndex, 1, newData)
-            */
-    
-           // getLocalStorage[inRowIndex] = Object.assign({}, getLocalStorage[index], newData)
-
+            
+            console.log(data.items[inRowIndex])
            let olaJson = JSON.stringify(getLocalStorage);
 
            localStorage.setItem("products", olaJson);
