@@ -41,10 +41,10 @@ require([
   "dojo/on",
   "dojo/mouse",
   "dojo/domReady!",
-  "dojo/store/JsonRest",
-  "dojo/data/ItemFileWriteStore",
-  "dojo/_base/lang",
-  "dojox/grid/_Events",
+  //"dojo/store/JsonRest",
+  //"dojo/data/ItemFileWriteStore",
+  //"dojo/_base/lang",
+  //"dojox/grid/_Events",
 ], function (
   dom,
   domConstruct,
@@ -52,16 +52,9 @@ require([
   DataGrid,
   Memory,
   ObjectStore,
-  DateTextBox,
-  on,
-  event,
-  Button,
-  mouse,
-  JsonRest,
-  ItemFileWriteStore,
-  _Events
+  on
 ) {
-  getData()
+
   let getLocalStorage = JSON.parse(localStorage.getItem("products"));
   data = {
     identifier: "products",
