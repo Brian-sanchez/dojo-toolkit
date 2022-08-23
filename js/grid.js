@@ -83,7 +83,7 @@ require([
   grid = new DataGrid(
     {
       store: dataStore,
-      query: {id: new RegExp("[1-9]")},
+      query: {id: "*"},
       onApplyCellEdit: function (inValue, inRowIndex, inFieldIndex) {
         //console.log(inValue); // valor de la celda editada
         //console.log(inFieldIndex); // nombre del field
