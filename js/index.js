@@ -1,8 +1,39 @@
+// function borderContainer(){
+//     require([
+//         "dijit/layout/BorderContainer",
+//         "dijit/layout/ContentPane"
+//     ],function(BorderContainer,ContentPane){
+//         var bc = new BorderContainer({
+//             style: "width: 100%; height: 100%; border: none;"
+//         },"contenido");
+//         var cp1 = new ContentPane({
+//             region: "top",
+//             content: "<h1>THE PROJECT DOJO</h1><br>"+menu()
+//             // content: menu()
+//         },"menu");
+//         var cp2 = new ContentPane({
+//             region: "center",
+//             content: "center"
+//             // content: showGrid()
+//         });
+
+//         bc.addChild(cp1);
+//         bc.addChild(cp2);
+        
+//         bc.startup();
+
+//     });
+
+// }
+var grid, store, dataStore, danik;
+var generated = false;
+
 function menu() {
 
     require(
         ["dojo/dom-style",
             "dojo/dom",
+            "dojo/dom-construct",
             "dijit/MenuBar",
             "dijit/PopupMenuBarItem",
             "dijit/Menu",
@@ -12,7 +43,7 @@ function menu() {
             "dojo/ready"],
 
 
-        function (ready, dom, MenuBar, PopupMenuBarItem, Menu, MenuBarItem, MenuItem, DropDownMenu) {
+        function (ready, dom,domConstruct, MenuBar, PopupMenuBarItem, Menu, MenuBarItem, MenuItem, DropDownMenu) {
 
             //var cs = domStyle.getComputedStyle(dom.byId("menu"));
             //var w = cs.width, h = cs.height;
@@ -20,7 +51,7 @@ function menu() {
             //var backgroundColor = style.set("menu", "backgroundColor", "red");
 
 
-            var pMenuBar = new MenuBar({}, "menu");
+            var pMenuBar = new MenuBar({},"menu");
             pMenuBar.addChild(new MenuBarItem({
                 id: "user",
                 label: "Users",
@@ -28,7 +59,11 @@ function menu() {
                     // dom.byId("users").innerHTML = "Users";
                     dom.byId("users").style.display = 'inline';
                     dom.byId("products").style.display = 'none';
-                    showGrid();
+                    if(!generated){
+                        // domConstruct.destroy("grid");
+                        showGrid();
+
+                    }else dom.byId("grid").style.display="inline";
                 }
             }));
             pMenuBar.addChild(new MenuBarItem({
@@ -38,11 +73,13 @@ function menu() {
                     dom.byId("products").innerHTML = "Productos";
                     dom.byId("products").style.display = 'inline';
                     dom.byId("users").style.display = 'none';
+                    dom.byId("grid").style.display = 'none';
                 }
             }));
 
             // pMenuBar.placeAt("menu");
             pMenuBar.startup();
+            
 
 
         });
@@ -79,7 +116,7 @@ function deleteCustomer(item) {
 }
 
 function showGrid() {
-    var grid, store, dataStore, danik;
+    
 
 
 
@@ -107,7 +144,7 @@ function showGrid() {
         Memory,
         ObjectStore
     ) {
-
+        // domConstruct.create("div",{id: "grid"},"users");
         dom.byId("grid").style.display="inline";
 
         let data = JSON.parse(localStorage.getItem("customers"));
@@ -144,7 +181,7 @@ function showGrid() {
                 },
                 "grid"
             );
-
+            generated = true;
             return grid;
         }
 
