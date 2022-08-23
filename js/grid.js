@@ -73,16 +73,23 @@ require([
   dataStore = new ObjectStore({ objectStore: store });
   danik = new Stateful(data.items);
 
+  let numero = 1 
+
+  while (numero <= 10) {
+    numero++;
+  }
+
+  console.log(numero)
   grid = new DataGrid(
     {
       store: dataStore,
-      query: { id: "*" },
+      query: {id: new RegExp("[1-9]")},
       onApplyCellEdit: function (inValue, inRowIndex, inFieldIndex) {
-        console.log(inValue); // valor de la celda editada
-        console.log(inFieldIndex); // nombre del field
-        console.log(inRowIndex); // index del array del datagrid
+        //console.log(inValue); // valor de la celda editada
+        //console.log(inFieldIndex); // nombre del field
+        //console.log(inRowIndex); // index del array del datagrid
 
-        console.log(data.items[inRowIndex]);
+        //console.log(data.items[inRowIndex]);
         let olaJson = JSON.stringify(getLocalStorage);
 
         localStorage.setItem("products", olaJson);
@@ -111,11 +118,11 @@ require([
       structure: [
         {
           noscroll: false,
-          defaultCell: { width: "120px", editable: true },
+          defaultCell: { width: "140px", editable: true },
           cells: [
             { name: "ID", field: "id" },
-            { name: "Nombre", field: "name" },
-            { name: "Precio", field: "price" },
+            { name: "Name", field: "name" },
+            { name: "Price", field: "price" },
             { name: "Action", field: "id", formatter: getDelete },
           ],
         },
