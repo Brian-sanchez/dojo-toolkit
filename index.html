@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./dojo-release-1.17.3/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css" />
+    <script>dojoConfig = { async: true }</script>
+    <script src="./dojo-release-1.17.3/dojo/dojo.js"></script>
     <link rel="stylesheet" href="./styles/style.css">
-    <script src="../dojo-release-1.17.3/dojo/dojo.js"></script>
-    <link rel="stylesheet" href="../dojo-release-1.17.3/dojo/resources/dojo.css">
-    <link rel="stylesheet" href="../dojo-release-1.17.3/dojox/grid/resources/claroGrid.css">
     <title>DOJO PROJECT</title>
 </head>
-<body>
-    <h1 id="greeting">Customers</h1>
-    <br />
-    <div id="grid">Primer div</div>
-    <button data-dojo-type="dijit/form/Button" type="button" onclick="console.log('pagina de bruno')">
-        Add customers</button>
-    <script src="../dojo-release-1.17.3/dojo/dojo.js" data-dojo-config="async: false"></script>
-
+<body id="contenido" onload="menu(); mostrarData();" class="claro">
+	<h1>THE PROJECT DOJO</h1>
+		<!-- <div>
+			<button id="clienteButton" type="button"></button>
+			<button id="productoButton" type="button"></button>
+		</div> -->
+	
+	<div id="menu"></div>
+	<div id="users"></div>
+	<div id="products"></div>
+	
+	<div id="gridClients" style="left: unset; top: unset;"></div>
+	<div id="gridProducts" style="left: unset; top: unset;"></div>
 
     <script src="./js/index.js"></script>
 </body>
-
 </html>
