@@ -23,8 +23,6 @@ function mostrarData() {
             let arr = JSON.parse(localStorage.getItem("products"));
             let arr2 = JSON.parse(localStorage.getItem("customers"));
 
-            //localStorage.setItem("deleted", JSON.stringify({"click": false, "click2": false}));
-
             let clicked = JSON.parse(localStorage.getItem("deleted"));
 
             if (arr.length < 32 && clicked.click === true) {
@@ -161,6 +159,18 @@ function getDataProducts() {
         localStorage.setItem("products", data);
       });
     });
+}
+
+function getDataDeleted() {
+    localStorage.setItem("deleted", JSON.stringify({"click": false, "click2": false}));
+}
+
+if (localStorage.getItem("customers") == null && localStorage.getItem("products") == null && localStorage.getItem("deleted") == null){
+   console.log("cargue los datos xq no habia nada");
+   getDataClients(); 
+   getDataProducts();
+   getDataDeleted();
+   console.log(localStorage.getItem("customers"))
 }
 
 function showGridClients() {
