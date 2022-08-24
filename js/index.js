@@ -79,6 +79,9 @@ function menu() {
                         console.log("Se genero la gridClients");
                     }else dom.byId("gridClients").style.display="inline";
                     dom.byId("gridProducts").style.display = 'none';
+
+                    // fetch("/dojo-release-1.17.3/users/user.html").then(response => response.text())
+                    //                                              .then(text => dom.byId("users").innerHTML = text);
                 }
             }));
             pMenuBar.addChild(new MenuBarItem({
