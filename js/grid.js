@@ -77,10 +77,11 @@ function getData() {
     danik = new Stateful(data.items);
 
   
-    grid = new DataGrid(
+    grid = new dojox.grid.EnhancedGrid(
       {
         store: dataStore,
-        query: { id: "*" },
+        brianlovepepe: ["1","2","3"],
+        query: {id: new RegExp("1?")},
         onApplyCellEdit: function (inValue, inRowIndex, inFieldIndex) {
           console.log(inValue); // valor de la celda editada
           console.log(inFieldIndex); // nombre del field
@@ -126,13 +127,15 @@ function getData() {
         ],
         plugins: {
             pagination: {
-                pageSizes: ["25", "50", "100", "All"],
-                description: true,
-                sizeSwitch: true,
-                pageStepper: true,
-                gotoButton: true,
-                maxPageStep: 4,
-                position: "bottom"
+              pageSizes: [10, 25, 30, 50, 100, Infinity],
+              description: true,	
+              sizeSwitch: true,	
+              pageStepper: true,	
+              gotoButton: true,	
+              maxPageStep: 10,	
+              position: "bottom",	
+              defaultPage: 2, 	
+              defaultPageSize: 25
             }
           },
       },
