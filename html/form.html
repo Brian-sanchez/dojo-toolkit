@@ -4,49 +4,17 @@
 <head>
     <link rel="stylesheet" href="../dojo-release-1.17.3/dijit/themes/claro/claro.css">
 
-    <script>dojoConfig = { parseOnLoad: true }</script>
+    <script>dojoConfig = { async: true, parseOnLoad: true }</script>
     <script src='../dojo-release-1.17.3/dojo/dojo.js'></script>
 
-    <script>
-        require([
-            "dojo/parser",
-            "dijit/form/Form",
-            "dijit/form/Button",
-            "dijit/form/ValidationTextBox",
-            "dijit/form/DateTextBox",
-            "dojox/validate/web"
-        ]);
-    </script>
+    <script type="text/javascript" src="../js/form.js"></script>
 </head>
 
-<body class="claro">
+<body class="claro" onload="formulario();">
     <label for="">Register Client</label><br>
 
     <div data-dojo-type="dijit/form/Form" id="myForm" data-dojo-id="myForm" encType="multipart/form-data" action=""
         method="">
-        <script type="dojo/on" data-dojo-event="reset">
-            return confirm('Press OK to reset widget values');
-        </script>
-
-        <script type="dojo/on" data-dojo-event="submit">
-            event.preventDefault();
-            let clients = [];
-            let client = {id:"", first:"", last:"", phone:"", email:""};
-            client.id = clients.length + 1;
-             
-            if(this.validate()){
-                client.first = myForm.getValues().first;
-                client.last = myForm.getValues().last;
-                client.phone = myForm.getValues().phone;
-                client.email = myForm.getValues().email;
-                clients = [...clients, client];
-                console.log(clients);
-                return confirm('Valid form, press OK to send');
-            }else{
-                alert('The form contains invalid data or missing information!');
-                return false;
-            }
-        </script>
 
         <table style="border: 1px solid #9f9f9f;" cellspacing="10">
             <tr>
@@ -85,7 +53,7 @@
                     regExp: '.[0-9]{7,13}$',
                     required: true,
                     placeHolder:'Your Phone',
-                    invalidMessage: 'Phone Required!'" />
+                    invalidMessage: 'Phone Required, Use Numbers!'" />
                 </td>
             </tr>
             <tr>
@@ -103,10 +71,9 @@
             </tr>
         </table>
 
-        <button data-dojo-type="dijit/form/Button" type="button" onClick="console.log(myForm.getValues())">
-            Valores del formulario</button>
-        <button data-dojo-type="dijit/form/Button" type="submit">Submit</button>
-        <button data-dojo-type="dijit/form/Button" type="reset">Reset</button>
+        <div data-dojo-type="dijit/form/Button" id="consola"></div>
+        <div data-dojo-type="dijit/form/Button" id="submit" type="submit"></div>
+        <div data-dojo-type="dijit/form/Button" id="reset"></div>
 
     </div>
 </body>
