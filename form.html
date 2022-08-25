@@ -10,9 +10,9 @@
     <script type="text/javascript" src="./js/form.js"></script> 
 </head>
 
-<body class="claro" onload="formulario();" style="width: 90%; background:brown; height: auto;">
+<body class="claro" onload="formulario();" style="width: 90%; height: auto;">
 
-    <div style="width: 90%; background:aquamarine; height: auto;">
+    <div style="width: 90%; height: auto;">
     <h4>Register Client</h4><br>
 
     <div data-dojo-type="dijit/form/Form" id="myForm" data-dojo-id="myForm" encType="multipart/form-data" action=""
@@ -73,9 +73,14 @@
             </tr>
         </table>
 
-        <div data-dojo-type="dijit/form/Button" id="submit" type="submit"></div>
+        <div data-dojo-type="dijit/form/Button" id="submit" type="submit" onclick="reload()"></div>
         <div data-dojo-type="dijit/form/Button" id="reset"></div>
 
+        <script>
+            function reload(){
+                window.location.href = "http://127.0.0.1:5500/index.html";
+            }
+        </script>
     </div>
 </div>
 </body>

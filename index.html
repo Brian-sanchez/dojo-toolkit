@@ -26,22 +26,29 @@
   <body id="contenido" onload="menu(); mostrarData();" class="claro">
     <h1>THE PROJECT DOJO</h1>
     <div id="menu"></div>
-    <div id="users"></div>
-    <div id="products"></div>
-
-    <div id="gridClients"><Object type="text/html" data="./gridClients.html"></Object></div>
-    <div id="gridProducts"><Object type="text/html" data="./gridProducts.html"></Object></div>
-
-    <!-- <div id="gridClients" style="left: unset; top: unset"></div> -->
-    <!-- <div id="gridProducts" style="left: unset; top: unset"></div> -->
+    <div id="users">
+      <button id="addUser" style="display: none;" onclick="construirFormUsuario()">
+        add Client
+      </button>
+      <div id="gridClients"></div>
+    </div>
+    <div id="products">
+      <button id="addProduct" style="display: none;">
+        add Product
+      </button>
+      <div id="gridProducts"></div>
+    </div>
+    
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br><br><br><br><br>
-    <button id="agregar" onclick="llamarFormulario()">
-      add Client
-    </button>
-    <div class="form"><Object type="text/html" data="./form.html" style="width: 100%;"></Object></div>
+   
+    <div>
+      <!-- <Object type="text/html" data="./form.html" style="width: 100%;height: 450px;"></Object> -->
+      <div id="content"></div>
+    </div>
 
     <script src="./js/index.js"></script>
-    <!-- <script src="./js/formulario.js"></script> -->
+    
+    <script src="./js/form.js"></script>
   </body>
-</html>
+</html>content

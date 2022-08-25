@@ -24,6 +24,14 @@
 //     });
 // });
 
+function agregar(){
+    // let email = document.getElementById("fisrt")
+
+    // console.log(email);
+    location.reload()
+    
+}
+
 function formulario() {
     require([
         "dojo/dom",
@@ -42,14 +50,12 @@ function formulario() {
             type: "submit",
             onClick: function (event) {
                 // event.preventDefault();
-
-
-
                 let clients = JSON.parse(localStorage.getItem("customers")) || [];
 
-                console.log(clients);
+                console.log(clients)   
                 let client = { id: "", first: "", last: "", phone: "", email: "" };
-                client.id = clients.length + 1;
+
+                client.id = (clients.length + 1).toString();
 
                 if (validate) {
                     client.first = dijit.byId("myForm").getValues().first;
@@ -60,15 +66,14 @@ function formulario() {
                    
                     localStorage.setItem("customers", JSON.stringify(clients))
                   
-                   
-
+                    console.log(clients);
                     // return confirm('Valid form, press OK to send');
                 } else {
                     alert('The form contains invalid data or missing information!');
                     return false;
                 }
                 
-
+                location.reload()
                 // return true;
             }
         }, "submit").startup();

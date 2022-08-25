@@ -1,4 +1,4 @@
-function construirLorem() {
+function construirForm() {
     require([
       "dojo/html",
       "dojo/dom",
@@ -8,9 +8,9 @@ function construirLorem() {
     ], function (html, dom, on) {
       on(dom.byId("setContent"), "click", function () {
         html.set(
-          dom.byId("includedContent"),
+          dom.byId("agregar"),
           "<div>" +
-            "<object data='./views/usuarios.html' type='text/html'>" +
+            "<object data='./form.html' type='text/html'>" +
             "</div>"
         );
       });

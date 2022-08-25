@@ -5,6 +5,88 @@ let seBorro = false;
 let click = false;
 let click2 = false;
 
+function construirFormUsuario() {
+  require([
+    "dojo/html",
+    "dojo/dom",
+    "dojo/on",
+    "dijit/form/NumberTextBox",
+    "dojo/domReady!",
+  ], function (html, dom) {
+    // on(dom.byId("setContent"), "click", function () {
+      console.log("click");
+      html.set(
+        dom.byId("content"),
+        "<div>" +
+          `  <h4>Register Client</h4><br>
+
+          <div data-dojo-type="dijit/form/Form" id="myForm" data-dojo-id="myForm" encType="multipart/form-data" action=""
+              method="">
+      
+              <table style="border: 1px solid #9f9f9f;" cellspacing="10">
+                  <tr>
+                      <td>
+                          <label for="first">Name:</label>
+                      </td>
+                      <td>
+                          <input data-dojo-type="dijit/form/ValidationTextBox" id="first" name="first" data-dojo-props="
+                          promptMessage:'Enter Your Name: [A-Z] Min 3, Max 15 characters',
+                          regExp: '.[a-z, A-Z]{2,14}$',
+                          required: true,
+                          placeHolder:'Your First Name',
+                          invalidMessage: 'First Name Required, [Aa-Zz] !'" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <label for="last">Last Name:</label>
+                      </td>
+                      <td>
+                          <input data-dojo-type="dijit/form/ValidationTextBox" id="last" name="last" data-dojo-props="
+                          promptMessage:'Enter Your Last Name: [A-Z] Min 3, Max 15 characters',
+                          regExp: '.[a-z, A-Z]{2,14}$',
+                          required: true,
+                          placeHolder:'Your Last Name',
+                          invalidMessage: 'Last Name Required, [Aa-Zz] !'" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <label for="phone">Phone:</label>
+                      </td>
+                      <td>
+                          <input data-dojo-type="dijit/form/ValidationTextBox" id="phone" name="phone" data-dojo-props="
+                          promptMessage:'Enter Your Phone: Min 8, Max 14 numbers',
+                          regExp: '.[0-9]{7,13}$',
+                          required: true,
+                          placeHolder:'Your Phone',
+                          invalidMessage: 'Phone Required, Use Numbers!'" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <label for="email">Email:</label>
+                      </td>
+                      <td>
+                          <input data-dojo-type="dijit/form/ValidationTextBox" id="email" name="email" data-dojo-props="
+                          promptMessage:'Enter Your Email: Use format user@email.com',
+                          validator: dojox.validate.isEmailAddress,
+                          required: true,
+                          placeHolder:'Your Email',
+                          invalidMessage: 'Email Required, [user@email.com] !'" />
+                      </td>
+                  </tr>
+              </table>
+              <button id="pepe" onclick="agregar()">agregar</button>
+      
+              <div data-dojo-type="dijit/form/Button" id="submit" type="submit" onclick="reload()"></div>
+              <div data-dojo-type="dijit/form/Button" id="reset"></div>` +
+          "</div>"
+      );
+    
+  });
+}
+
 function mostrarData() {
   require([
     "dojo/dom-style",
@@ -76,11 +158,15 @@ function menu() {
         onClick: function () {
           dom.byId("users").style.display = "inline";
           dom.byId("products").style.display = "none";
+          dom.byId("addUser").style.display = "inline";
+          dom.byId("addProduct").style.display = "none";
+
+          
+
 
           if (!generatedClients) {
             showGridClients();
           } else dom.byId("gridClients").style.display = "inline";
-
 
           dom.byId("gridProducts").style.display = "none";
         },
@@ -93,6 +179,8 @@ function menu() {
         onClick: function () {
           dom.byId("products").style.display = "inline";
           dom.byId("users").style.display = "none";
+          dom.byId("addProduct").style.display = "inline";
+          dom.byId("addUser").style.display = "none";
 
           if (!generatedProducts) {
             showGridProducts();
@@ -139,7 +227,7 @@ function deleteProducts(item) {
 
 function getDataClients() {
   require(["dojo/request"], function (request) {
-    request.get("../clientes.json").then(function (data) {
+    request.get("../clients.json").then(function (data) {
       localStorage.setItem("customers", data);
     });
   });
