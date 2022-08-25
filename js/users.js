@@ -1,9 +1,3 @@
-let grid, grid2, store, dataStore, danik;
-let generatedClients = false;
-let generatedProducts = false;
-let seBorro = false;
-let click = false;
-let click2 = false;
 
 function mostrarData() {
     require(
@@ -19,7 +13,7 @@ function mostrarData() {
             "dojo/ready"],
 
 
-        function (ready, dom,domConstruct, MenuBar, PopupMenuBarItem, Menu, MenuBarItem, MenuItem, DropDownMenu) {
+        function (ready, dom, domConstruct, MenuBar, PopupMenuBarItem, Menu, MenuBarItem, MenuItem, DropDownMenu) {
             let arr = JSON.parse(localStorage.getItem("products"));
             let arr2 = JSON.parse(localStorage.getItem("customers"));
 
@@ -31,7 +25,7 @@ function mostrarData() {
                 showGridProducts();
             } else if (arr2.length < 12 && clicked.click2 === true) {
                 showGridClients();
-                dom.byId("gridClients").style.display="inline";
+                dom.byId("gridClients").style.display = "inline";
             }
 
             console.log(clicked)
@@ -52,7 +46,7 @@ function menu() {
             "dojo/ready"],
 
 
-        function (ready, dom,domConstruct, MenuBar, PopupMenuBarItem, Menu, MenuBarItem, MenuItem, DropDownMenu) {
+        function (ready, dom, domConstruct, MenuBar, PopupMenuBarItem, Menu, MenuBarItem, MenuItem, DropDownMenu) {
 
             //var cs = domStyle.getComputedStyle(dom.byId("menu"));
             //var w = cs.width, h = cs.height;
@@ -60,7 +54,7 @@ function menu() {
             //var backgroundColor = style.set("menu", "backgroundColor", "red");
 
 
-            var pMenuBar = new MenuBar({},"menu");
+            var pMenuBar = new MenuBar({}, "menu");
             pMenuBar.addChild(new MenuBarItem({
                 id: "user",
                 label: "Users",
@@ -69,11 +63,11 @@ function menu() {
                     dom.byId("users").style.display = 'inline';
                     dom.byId("products").style.display = 'none';
 
-                    if(!generatedClients){
+                    if (!generatedClients) {
                         // domConstruct.destroy("grid");
                         showGridClients();
                         console.log("Se genero la gridClients");
-                    }else dom.byId("gridClients").style.display="inline";
+                    } else dom.byId("gridClients").style.display = "inline";
                     dom.byId("gridProducts").style.display = 'none';
                 }
             }));
@@ -85,11 +79,11 @@ function menu() {
                     dom.byId("products").style.display = 'inline';
                     dom.byId("users").style.display = 'none';
 
-                    if(!generatedProducts){
+                    if (!generatedProducts) {
                         // domConstruct.destroy("grid");
                         showGridProducts();
                         console.log("Se genero la gridProducts");
-                    }else dom.byId("gridProducts").style.display="inline";
+                    } else dom.byId("gridProducts").style.display = "inline";
                     dom.byId("gridClients").style.display = 'none';
                 }
             }));
@@ -100,51 +94,6 @@ function menu() {
         });
 }
 
-
-function deleteCustomer(item) {
-    let arr = JSON.parse(localStorage.getItem("customers"));
-
-    console.log("viejo: ", arr);
-    let newArr = arr.filter(contact => contact.id != item)
-    console.log("nuevo: ", newArr);
-
-    let newArrJson = JSON.stringify(newArr);
-
-    localStorage.setItem("customers", newArrJson);
-    
-    let click = {click: false, click2: true}
-    localStorage.setItem("deleted", JSON.stringify(click));
-
-    window.location.reload();
-}
-
-function deleteProducts(item) {
-    let arr = JSON.parse(localStorage.getItem("products"));
-    console.log(grid2)
-    console.log("viejo: ", arr);
-    let newArr = arr.filter(product => product.id != item)
-    console.log("nuevo: ", newArr);
-
-    let newArrJson = JSON.stringify(newArr);
-
-    localStorage.setItem("products", newArrJson);
-    /*
-    arr.forEach(function (datos) {
-        if (item == datos.id) {
-            store.remove(item)
-            store.save()
-        }
-    });
-    */
-
-    let click = {click: true, click2: false}
-    localStorage.setItem("deleted", JSON.stringify(click));
-
-    click2 = true;
-    click = false;
-    window.location.reload();
-}
-
 function getDataClients() {
     require(["dojo/request"], function (request) {
         request.get("../clientes.json").then(function (data) {
@@ -153,28 +102,20 @@ function getDataClients() {
     });
 }
 
-function getDataProducts() {
-    require(["dojo/request"], function (request) {
-      request.get("../products.json").then(function (data) {
-        localStorage.setItem("products", data);
-      });
-    });
-}
-
 function getDataDeleted() {
-    localStorage.setItem("deleted", JSON.stringify({"click": false, "click2": false}));
+    localStorage.setItem("deleted", JSON.stringify({ "click": false, "click2": false }));
 }
 
-if (localStorage.getItem("customers") == null && localStorage.getItem("products") == null && localStorage.getItem("deleted") == null){
-   console.log("cargue los datos xq no habia nada");
-   getDataClients(); 
-   getDataProducts();
-   getDataDeleted();
-   console.log(localStorage.getItem("customers"))
+if (localStorage.getItem("customers") == null && localStorage.getItem("products") == null && localStorage.getItem("deleted") == null) {
+    console.log("cargue los datos xq no habia nada");
+    getDataClients();
+    getDataProducts();
+    getDataDeleted();
+    console.log(localStorage.getItem("customers"))
 }
 
 function showGridClients() {
-    
+
     require([
         "dojo/dom",
         "dojo/dom-construct",
@@ -200,7 +141,7 @@ function showGridClients() {
         ObjectStore
     ) {
         // domConstruct.create("div",{id: "grid"},"users");
-        dom.byId("gridClients").style.display="inline";
+        dom.byId("gridClients").style.display = "inline";
 
         let data = JSON.parse(localStorage.getItem("customers"));
 
@@ -251,87 +192,48 @@ function showGridClients() {
     });
 }
 
-function showGridProducts() {
-    
-    require([
-        "dojo/dom",
-        "dojo/dom-construct",
-        "dojo/Stateful",
+function deleteCustomer(item) {
+    let arr = JSON.parse(localStorage.getItem("customers"));
 
-        "dojo/on",
-        "dojo/_base/array",
+    console.log("viejo: ", arr);
+    let newArr = arr.filter(contact => contact.id != item)
+    console.log("nuevo: ", newArr);
 
-        "dojox/grid/DataGrid",
-        "dojo/store/Memory",
-        "dojo/data/ObjectStore",
+    let newArrJson = JSON.stringify(newArr);
 
-        "dojo/request",
-        "dojo/domReady!",
-    ], function (
-        dom,
-        domConstruct,
-        Stateful,
-        on,
-        arrayUtil,
-        DataGrid,
-        Memory,
-        ObjectStore
-    ) {
-        let getLocalStorage = JSON.parse(localStorage.getItem("products"));
-        dom.byId("gridProducts").style.display="inline";
+    localStorage.setItem("customers", newArrJson);
 
-        data = {
-            items: getLocalStorage,
-        };
+    let click = { click: false, click2: true }
+    localStorage.setItem("deleted", JSON.stringify(click));
 
-        store = new Memory({ data: data });
-        dataStore = new ObjectStore({ objectStore: store });
-        danik = new Stateful(data);
-
-        function createGrid(dataStore) {
-            grid2 = new DataGrid(
-                {
-                    store: dataStore,
-                    query: { id: "*" },
-                    onApplyCellEdit: function (inValue, inRowIndex, inFieldIndex) {
-                        let olaJson = JSON.stringify(getLocalStorage);
-                
-                        localStorage.setItem("products", olaJson);
-                    },
-
-                    structure: [
-                        {
-                            noscroll: true,
-                            defaultCell: { width: "100px", editable: true },
-                            cells: [
-                                { name: "Id", field: "id" },
-                                { name: "Name", field: "name" },
-                                { name: "Description", field: "description" },
-                                { name: "Category", field: "category"},
-                                { name: "Price", field: "price"},
-                                {
-                                    name: "Action",
-                                    field: "id",
-                                    formatter: getDeleteProduct,
-                                    width: "80px",
-                                },
-                            ],
-                        },
-                    ],
-                },
-                "gridProducts"
-            );
-            generatedProducts = true;
-            return grid2;
-        }
-
-        function getDeleteProduct(item) {
-            return `<button onclick=deleteProducts(${item}) id='myButton' class='btn'>Delete</button>`;
-        }
-
-        dojo.ready(function () {
-            grid2 = createGrid(dataStore);
-            grid2.startup();
-        });
-    });
+    window.location.reload();
 }
+
+function deleteProducts(item) {
+    let arr = JSON.parse(localStorage.getItem("products"));
+    console.log(grid2)
+    console.log("viejo: ", arr);
+    let newArr = arr.filter(product => product.id != item)
+    console.log("nuevo: ", newArr);
+
+    let newArrJson = JSON.stringify(newArr);
+
+    localStorage.setItem("products", newArrJson);
+    /*
+    arr.forEach(function (datos) {
+        if (item == datos.id) {
+            store.remove(item)
+            store.save()
+        }
+    });
+    */
+
+    let click = { click: true, click2: false }
+    localStorage.setItem("deleted", JSON.stringify(click));
+
+    click2 = true;
+    click = false;
+    window.location.reload();
+}
+
+
