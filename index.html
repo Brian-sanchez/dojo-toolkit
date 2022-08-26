@@ -21,34 +21,49 @@
       };
     </script>
     <script src="./dojo-release-1.17.3/dojo/dojo.js"></script>
+    <!-------------------------------------estilos---------------------------------------------->
+    <link
+      href="./dojo-release-1.17.3/dijit/themes/claro/claro.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="./dojo-release-1.17.3/dijit/themes/claro/claro.css"
+    />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&display=swap"
+      rel="stylesheet"
+    />
+    <!---------------------------------js imports---------------------------------------------->
+
+    <script>
+      dojoConfig = {
+        parseOnLoad: true,
+        foo: "bar",
+        async: true,
+      };
+    </script>
+    <script src="./js/index.js"></script>
+    <script src="./dojo-release-1.17.3/dojo/dojo.js"></script>
+
     <title>DOJO PROJECT</title>
   </head>
   <body id="contenido" onload="menu(); mostrarData();" class="claro">
-    <h1>THE PROJECT DOJO</h1>
+    <h1 id="title">DOJO PROJECT</h1>
     <div id="menu"></div>
-    <div id="users">
-      <button id="addUser" style="display: none;" onclick="formDialog()">
-        add Client
-      </button>
-      <div id="gridClients"></div>
-    </div>
-    <div id="products">
-      <button id="addProduct" style="display: none; " onclick="formDialogP()">
-        add Product
-      </button>
-      <div id="gridProducts"></div>
-    </div>
-    
-
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br><br><br><br><br>
-   
-    <div>
-      <!-- <Object type="text/html" data="./form.html" style="width: 100%;height: 450px;"></Object> -->
-      <div id="content"></div>
-    </div>
-
-    <script src="./js/index.js"></script>
-    
-    <script src="./js/form.js"></script>
+    <div id="users"></div>
+    <div id="products"></div>
   </body>
 </html>
