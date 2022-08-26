@@ -6,7 +6,6 @@ let click = false;
 let click2 = false;
 let generatedButton = false;
 
-
 function formDialog(){
   require([
     "dojo/parser",
@@ -126,7 +125,7 @@ function formDialog(){
         }
       });
       submit.placeAt("submit");
-      
+      submit.startup();
         
       reset = new Button({
           label: "Reset",
@@ -136,7 +135,7 @@ function formDialog(){
           }
       });
       reset.placeAt("reset");
-      
+      reset.startup();
 
     }
     generatedButton = true;
@@ -145,118 +144,7 @@ function formDialog(){
   });
 }
 
-function formDialogP(){
-  require([
-    "dojo/parser",
-    "dijit/Dialog", 
-    "dijit/form/Form",
-    "dijit/form/Button",
-    "dijit/form/ValidationTextBox",
-    "dijit/form/DateTextBox",
-    "dojox/validate",
-    "dojox/validate/web",
-    "dojo/domReady!"  
-  ],function(parser,Dialog, Form, Button, ValidationTextBox, DateTextBox, validate, web){
-    
-    if(!generatedButton){
-    
-    myDialog = new Dialog({
-      title: "Register Product",
-      content: "<div>" +
-      ` 
 
-      <div data-dojo-type="dijit/form/Form" id="myForm" data-dojo-id="myForm" encType="multipart/form-data" action=""
-          method="">
-  
-          <table style="border: 1px solid #9f9f9f;" cellspacing="10">
-          <tr>
-              <td>
-                  <label for="name">Product:</label>
-              </td>
-              <td>
-                  <input data-dojo-type="dijit/form/ValidationTextBox" id="products" name="products" data-dojo-props="
-                  promptMessage:'Enter a Product: Max 25 characters',
-                  regExp: '.[a-z, A-Z, 0-9]{2,24}$',
-                  required: true,
-                  placeHolder:'add Product Name',
-                  invalidMessage: 'add Name Required!'" />
-              </td>
-          </tr>
-
-          <tr>
-              <td>
-                  <label for="name">Precio: US$</label>
-              </td>
-              <td>
-                  <input data-dojo-type="dijit/form/ValidationTextBox" id="price" name="price" data-dojo-props="
-                  promptMessage:'Enter a price: Max 7 characters',
-                  regExp: '.[0-9]{0,6}$',
-                  required: true,
-                  placeHolder:'US$ add price',
-                  invalidMessage: 'add price Required!'" />
-              </td>
-          </tr>
-
-      </table>
-            
-          <div data-dojo-type="dijit/form/Button" id="submit"></div>
-          <div data-dojo-type="dijit/form/Button" id="reset" type="reset"></div>` +
-      "</div>",
-      style: "width: 300px"
-  });
-  myDialog.show();
-
-
-      submit = new Button({
-        label: "Submit",
-        type: "submit",
-        onClick: function (event) {
-            // event.preventDefault();
-            let prods = JSON.parse(localStorage.getItem("products")) || [];
-    
-            console.log(prods)   
-            let prod = { id: "", name: "", price: ""};
-    
-            prod.id = (prods.length + 1).toString();
-    
-            if (validate) {
-                prod.name = dijit.byId("myForm").getValues().name;
-                prod.price = dijit.byId("myForm").getValues().price;
-                
-                prods = [...prods, prod];
-               
-                localStorage.setItem("products", JSON.stringify(prods))
-              
-                console.log(prods);
-                // return confirm('Valid form, press OK to send');
-            } else {
-                alert('The form contains invalid data or missing information!');
-                return false;
-            }
-            
-            location.reload()
-            // return true;
-        }
-      });
-      submit.placeAt("submit");
-      
-        
-      reset = new Button({
-          label: "Reset",
-          type: "reset",
-          onClick: function () {
-              return confirm('Press OK to reset widget values');
-          }
-      });
-      reset.placeAt("reset");
-      
-
-    }
-    generatedButton = true;
-    myDialog.show();
-
-  });
-}
 
 // function construirFormUsuario() {
 //   require([
@@ -265,6 +153,7 @@ function formDialogP(){
 //     "dojo/on",
 //     "dijit/form/NumberTextBox",
 //     "dojo/domReady!",
+    
 //   ], function (html, dom) {
 //     // on(dom.byId("setContent"), "click", function () {
 //       console.log("click");
@@ -672,21 +561,66 @@ function showGridProducts() {
   });
 }
 
-// let button = document.getElementById("agregar");
-// console.log(button);
+function agregar(){
+  // let email = document.getElementById("fisrt")
 
-// function llamarFormulario() {
-//   require(["dojo/html", "dojo/dom", "dojo/on", "dojo/ready"], function (
-//     html,
-//     dom,
-//     on,
-//     ready
-//   ) {
-//     fetch("./../form.html")
-//       .then((response) => response.text())
-//       .then((text) => (dom.byId("formulario").innerHTML = text));
+  // console.log(email);
+  location.reload()
+  
+}
 
-//     //  dojo.byId("formulario")
-//     //html.set(dojo.byId("formulario"), "pepepepe");
+// function formulario() {
+//   require([
+//       "dojo/dom",
+//       "dojo/parser",
+//       "dijit/form/Form",
+//       "dijit/form/Button",
+//       "dijit/form/ValidationTextBox",
+//       "dijit/form/DateTextBox",
+//       "dojox/validate",
+//       "dojox/validate/web",
+//       "dojo/domReady!"
+//   ], function (dom, parser, Form, Button, ValidationTextBox, DateTextBox, validate, web) {
+
+//       var submit = new Button({
+//           label: "Submit",
+//           type: "submit",
+//           onClick: function (event) {
+//               // event.preventDefault();
+//               let clients = JSON.parse(localStorage.getItem("customers")) || [];
+
+//               console.log(clients)   
+//               let client = { id: "", first: "", last: "", phone: "", email: "" };
+
+//               client.id = (clients.length + 1).toString();
+
+//               if (validate) {
+//                   client.first = dijit.byId("myForm").getValues().first;
+//                   client.last = dijit.byId("myForm").getValues().last;
+//                   client.phone = dijit.byId("myForm").getValues().phone;
+//                   client.email = dijit.byId("myForm").getValues().email;
+//                   clients = [...clients, client];
+                 
+//                   localStorage.setItem("customers", JSON.stringify(clients))
+                
+//                   console.log(clients);
+//                   // return confirm('Valid form, press OK to send');
+//               } else {
+//                   alert('The form contains invalid data or missing information!');
+//                   return false;
+//               }
+              
+//               location.reload()
+//               // return true;
+//           }
+//       }, "submit").startup();
+
+//       var reset = new Button({
+//           label: "Reset",
+//           type: "reset",
+//           onClick: function () {
+//               return confirm('Press OK to reset widget values');
+//           }
+//       }, "reset").startup();
 //   });
 // }
