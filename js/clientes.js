@@ -43,17 +43,29 @@ function grilla() {
 
     /*set up layout*/
     var layout = [
-      { field: "id", datatype: "string" },
-      { field: "first", datatype: "string" },
-      { field: "last", datatype: "string" },
-      { field: "phone", datatype: "string" },
-      { name: "Email", field: "email", width: "160px" },
+
+      { field: "id", datatype: "number", width: "25px" },
+
+      { field: "first", datatype: "string", width: "100px" },
+
+      { field: "last", datatype: "string", width: "100px" },
+
+      { field: "phone", datatype: "string", width: "129px" },
+
+      { name: "Email", field: "email", width: "180px" },
+
       {
+
         name: "Action",
+
         field: "id",
+
         formatter: getDelete,
-        width: "80px",
+
+        width: "56px",
+
       },
+
     ];
 
     function showFilterBar() {
@@ -69,7 +81,7 @@ function grilla() {
         rowSelector: "50px",
         plugins: {
           pagination: {
-            pageSizes: ["5", "50", "100", "All"],
+            pageSizes: ["10", "20", "30", "All"],
             description: true,
             sizeSwitch: true,
             pageStepper: true,

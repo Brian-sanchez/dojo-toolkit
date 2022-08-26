@@ -43,17 +43,29 @@ function grilla2() {
 
     /*set up layout*/
     let layout = [
-      { field: "id", datatype: "number" },
-      { field: "name", datatype: "string" },
-      { field: "description", datatype: "string" },
-      { field: "category", datatype: "string" },
-      { field: "price", datatype: "number" },
+
+      { field: "id", datatype: "number", width: "25px" },
+
+      { field: "name", datatype: "string", width: "140px" },
+
+      { field: "description", datatype: "string", width: "225px" },
+
+      { field: "category", datatype: "string", width: "70px" },
+
+      { field: "price", datatype: "number", width: "60px" },
+
       {
+
         name: "Action",
+
         field: "id",
+
         formatter: getDeleteProduct,
-        width: "80px",
+
+        width: "56px",
+
       },
+
     ];
 
     function showFilterBar() {
