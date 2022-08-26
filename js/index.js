@@ -4,6 +4,7 @@ let generatedProducts = false;
 let seBorro = false;
 let click = false;
 let click2 = false;
+let generatedButton = false;
 
 function construirFormUsuario() {
   require([
@@ -84,6 +85,149 @@ function construirFormUsuario() {
           "</div>"
       );
     
+  });
+}
+
+function formDialog(){
+  require([
+    "dojo/parser",
+    "dijit/Dialog", 
+    "dijit/form/Form",
+    "dijit/form/Button",
+    "dijit/form/ValidationTextBox",
+    "dijit/form/DateTextBox",
+    "dojox/validate/web",
+    "dojo/domReady!"  
+  ],function(parser,Dialog, Form, Button, ValidationTextBox, DateTextBox, web){
+    
+    if(!generatedButton){
+    
+    myDialog = new Dialog({
+      title: "Register Client",
+      content: "<div>" +
+      ` 
+      <div data-dojo-type="dijit/form/Form" id="myForm" data-dojo-id="myForm" encType="multipart/form-data" action=""
+          method="">
+  
+          <table style="border: 1px solid #9f9f9f;" cellspacing="10">
+              <tr>
+                  <td>
+                      <label for="first">Name:</label>
+                  </td>
+                  <td>
+                      <input data-dojo-type="dijit/form/ValidationTextBox" id="first" name="first" data-dojo-props="
+                      promptMessage:'Enter Your Name: [A-Z] Min 3, Max 15 characters',
+                      regExp: '.[a-z, A-Z]{2,14}$',
+                      required: true,
+                      placeHolder:'Your First Name',
+                      invalidMessage: 'First Name Required, [Aa-Zz] !'" />
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label for="last">Last Name:</label>
+                  </td>
+                  <td>
+                      <input data-dojo-type="dijit/form/ValidationTextBox" id="last" name="last" data-dojo-props="
+                      promptMessage:'Enter Your Last Name: [A-Z] Min 3, Max 15 characters',
+                      regExp: '.[a-z, A-Z]{2,14}$',
+                      required: true,
+                      placeHolder:'Your Last Name',
+                      invalidMessage: 'Last Name Required, [Aa-Zz] !'" />
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label for="phone">Phone:</label>
+                  </td>
+                  <td>
+                      <input data-dojo-type="dijit/form/ValidationTextBox" id="phone" name="phone" data-dojo-props="
+                      promptMessage:'Enter Your Phone: Min 8, Max 14 numbers',
+                      regExp: '.[0-9]{7,13}$',
+                      required: true,
+                      placeHolder:'Your Phone',
+                      invalidMessage: 'Phone Required, Use Numbers!'" />
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label for="email">Email:</label>
+                  </td>
+                  <td>
+                      <input data-dojo-type="dijit/form/ValidationTextBox" id="email" name="email" data-dojo-props="
+                      promptMessage:'Enter Your Email: Use format user@email.com',
+                      validator: dojox.validate.isEmailAddress,
+                      required: true,
+                      placeHolder:'Your Email',
+                      invalidMessage: 'Email Required, [user@email.com] !'" />
+                  </td>
+              </tr>
+          </table>
+            
+          <div data-dojo-type="dijit/form/Button" id="submit"></div>
+          <div data-dojo-type="dijit/form/Button" id="reset" type="reset"></div>` +
+      "</div>",
+      style: "width: 300px"
+  });
+  myDialog.show();
+
+
+      submit = new Button({
+        label: "Submit",
+        type: "submit",
+        onClick: function (event) {
+            // event.preventDefault();
+            let clients = JSON.parse(localStorage.getItem("customers")) || [];
+  
+            let client = { id: "", first: "", last: "", phone: "", email: "" };
+            // console.log("ultimo id: ",clients[clients.length - 1].id)
+
+            let newId = parseInt(clients[clients.length - 1].id )+ 1
+
+            client.id = (newId).toString();
+
+            var form = dijit.byId("myForm");
+
+            if (form.validate()) {
+          
+                client.first = dijit.byId("myForm").getValues().first;
+                client.last = dijit.byId("myForm").getValues().last;
+                client.phone = dijit.byId("myForm").getValues().phone;
+                client.email = dijit.byId("myForm").getValues().email;
+                clients = [...clients, client];
+
+                console.log("nuevo ultimo id: ",clients[clients.length - 1].id)
+               
+                localStorage.setItem("customers", JSON.stringify(clients))
+              
+                console.log(clients);
+                 //return confirm('Valid form, press OK to send');
+            } else {
+                alert('The form contains invalid data or missing information!');
+                return false;
+            }
+            
+            location.reload()
+            // return true;
+        }
+      });
+      submit.placeAt("submit");
+      
+        
+      reset = new Button({
+          label: "Reset",
+          type: "reset",
+          onClick: function () {
+              return confirm('Press OK to reset widget values');
+          }
+      });
+      reset.placeAt("reset");
+      
+
+    }
+    generatedButton = true;
+    myDialog.show();
+
   });
 }
 
